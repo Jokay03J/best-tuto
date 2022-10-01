@@ -1,37 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Tags, Tuto } from 'src/app/types';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DbService {
-  items: Tuto[] = [];
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
-
-  addTutorial(url: string, tags: Tags[], author_id: number) {
-    this.items.push({
-      id: this.randomId(),
-      url,
-      tags: tags,
-      author: author_id
-    });
-  }
-
-  removeTutorial(id: number) {
-    this.items = this.items.filter(item => item.id !== id);
-  };
-
-  getTutos(): Tuto[] {
-    return this.items;
-  }
-
-  getTuto(id: number) {
-    let i = this.items.findIndex(item => item.id === id);
-    return this.items[i];
-  }
-
-  randomId(): number {
-    return Math.floor(Math.random() * 100);
+  getTutos() {
+    return this.http.get(
+      `${environment.supabaseUrl}/rest/v1/tutos`,
+      {
+        headers: {
+          apikey: environment.supabaseKey,
+          Authorization: `Bearer ${environment.supabaseKey}`,
+        },
+      }
+    );
   }
 }

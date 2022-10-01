@@ -2,7 +2,7 @@ export type Tuto = {
   id: number;
   url: string;
   tags: Tags[];
-  author: number;
+  author_name: string;
 }
 
 export enum Tags {

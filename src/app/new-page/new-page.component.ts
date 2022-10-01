@@ -39,7 +39,7 @@ export class NewPageComponent implements OnInit {
 
   Submit() {
     if(this.formGroup.valid) {
-      this.dbService.addTutorial(this.formGroup.value.url, this.tags, this.authService.randomId());
+      // this.dbService.addTutorial(this.formGroup.value.url, this.tags, this.authService.randomId());
       console.log(this.dbService.getTutos());
     } else {
       console.log(this.tags);
